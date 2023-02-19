@@ -32,7 +32,7 @@ public class UserController {
     }
 
     @PutMapping(value="/update/{id}")
-    public String getUpdates(@PathVariable long id,@RequestBody UserModel user){
+    public String getUpdates(@PathVariable int id,@RequestBody UserModel user){
         UserModel updateUser=repo.findById(id).get();
         updateUser.setFirstName(user.getFirstName());
         updateUser.setLastName(user.getLastName());
@@ -42,10 +42,20 @@ public class UserController {
         return "updated..";
     }
 
-    @DeleteMapping(value="/delete/{id}")
-    public String getDelete(@PathVariable long id){
+//    @DeleteMapping(value="/delete/{id}")
+//    public String getDelete(@PathVariable int id,@RequestBody UserModel user){
+//
+//
+//        UserModel deleteUser=repo.findById(id).get();
+//        repo.delete(deleteUser);
+//        return "Delete user with id :"+id;
+//    }
+
+    @DeleteMapping(value="/deletes/{id}")
+    public String getDelete(@PathVariable int id){
         UserModel deleteUser=repo.findById(id).get();
-        repo.delete(deleteUser);
+        //repo.delete(deleteUser);
+        repo.deleteById(id);
         return "Delete user with id :"+id;
     }
 
